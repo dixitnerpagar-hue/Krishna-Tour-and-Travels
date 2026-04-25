@@ -1,0 +1,81 @@
+{
+  "summary": "Iteration 2 e2e testing for Krishn Tour & Travels. Backend: 29/29 pytest passing — new endpoints (/config, /cars/availability, /payments/create-order, /payments/upi-notify), new booking fields (drop_date, duration_days, needs_negotiation, self_drive_*), Razorpay → UPI fallback, and Resend email send all verified (real message IDs returned in backend logs). Frontend: home, booking form, confirmation, and admin all functioning. Three minor branding leakages from old 'Krishna' name still present in code.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "App.js (line 11)", "issue": "document.title is hardcoded to 'Krishna Tour & Travels — Premium Cabs in Pune' which overrides the correct index.html title 'Krishn Tour and Travels — Ahmedabad Cabs'. Browser tab still shows old name + wrong city.", "selector": "document.title", "priority": "MEDIUM"},
+      {"component": "RateUs.jsx (lines 25, 52)", "issue": "Still references 'Krishna Tour & Travels' (review target_name) and 'discover Krishna Tour & Travels.' copy.", "selector": "n/a", "priority": "LOW"},
+      {"component": "Services.jsx (line 20)", "issue": "Copy still says 'Krishna Tours' instead of 'Krishn Tour and Travels'.", "selector": "n/a", "priority": "LOW"}
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "backend_tests_executed": {
+    "total": 29,
+    "passed": 29,
+    "failed": 0,
+    "coverage": [
+      "GET /api/ — status running, razorpay_enabled=false, email_enabled=true",
+      "GET /api/config — upi_id=7600491012@upi, owner_name='Pankaj Gemita'",
+      "POST /api/admin/login — success, wrong password 401, wrong user 401",
+      "POST /api/bookings — Round Trip + new fields (drop_date, duration_days=9, needs_negotiation=true) persist; Self Drive booking with self_drive_option/delivery_km",
+      "GET /api/bookings/{id} — returns new fields",
+      "GET /api/bookings — auth required (403), admin lists",
+      "PATCH /api/bookings/{id}/status — admin only, persists",
+      "POST /api/reviews — driver/car/site, rating 10 → 422",
+      "GET /api/cars/availability — empty initially, persists upsert",
+      "PUT /api/cars/availability/{name} — auth required, toggles available + note, GET reflects changes (verified persistence)",
+      "POST /api/payments/create-order — returns method='upi', upi_id='7600491012@upi' when razorpay disabled; 404 on unknown booking",
+      "POST /api/payments/verify — 400 when razorpay disabled",
+      "POST /api/payments/upi-notify — sets payment_status='advance_paid', payment_method='upi_pending_verify', advance_paid amount; 404 on unknown",
+      "GET /api/admin/stats — returns paid_bookings count along with new/today/total/total_reviews",
+      "DELETE /api/bookings/{id} — admin, verifies 404 after"
+    ]
+  },
+  "email_integration_verification": "Verified in /var/log/supervisor/backend.*.log — 'Email sent: 661e1b49-1421-4aa5-b9fd-df1da222f7f8' and 'Email sent: cf3fb791-c5c9-4bbc-98e1-f52618eafd23' returned by Resend after each test booking POST. asyncio.create_task fire-and-forget non-blocking confirmed.",
+  "frontend_tests_executed": {
+    "home_page": "PASS — title='Krishn Tour and Travels' (header), owner 'Pankaj Gemita · Ahmedabad', phone +91 76004 91012, hero 'Har safar ek yaadgaar kahaani.' with subheading 'Your Comfort, Our Wheels.', 3 CTAs (Book a Ride / WhatsApp Booking / Emergency Booking), logo image present",
+    "trip_type_dropdown": "PASS — 8 options exact: Car with Driver, Self Drive Car, Round Trip, One-Way Trip, Corporate Pickup, Airport Transfer, Wedding/Marriage, Emergency",
+    "booking_form_fields": "PASS — Pickup Date, Drop Date, Pickup Time, Drop Time labels all present; Duration (Days) field present",
+    "round_trip_routes": "PASS — Selecting 'Round Trip' shows route chips for all 10 cities (Vadodara, Rajkot, Surat, Bhuj, Jodhpur, Udaipur, Indore, Jamnagar, Bhavnagar, Gandhidham)",
+    "self_drive_radios": "PASS — 2 radio buttons appear for Self Drive Car",
+    "wedding_marriage_note": "PASS — Selecting Wedding/Marriage shows 'no decoration' and 'scratch' notes",
+    "negotiation_message": "PASS — Setting Duration=10 shows 'Booking >7 days — price negotiation available!' message",
+    "fleet_section": "PASS — All 8 standard cars (Wagon R, Maruti Swift Dzire, Hyundai Aura, Maruti Ertiga, Honda City, Innova, Toyota Innova Crysta, Toyota Fortuner) and RENT THIS CAR buttons rendered",
+    "premium_fleet": "PASS — Mercedes E-Class, BMW 5-Series, Audi A6, Toyota Fortuner all visible",
+    "routes_section": "PASS — 'POPULAR ROUTES — Oneway & Round Trips' with Round Trip / One-Way Trip tabs and route cards",
+    "booking_submission": "PASS — POST /api/bookings → redirected to /booking/{id} with toast 'Booking received! Redirecting to payment…'",
+    "confirmation_page": "PASS — Booking summary card with ID/Trip/Name/Phone/Pickup/Drop/Duration; 3-step header (Payment 50% → Documents → Done); 'Pay via UPI' card showing UPI ID '7600491012@upi' with copy icon and 'I have paid' button",
+    "admin_dashboard": "PASS — login admin/admin123 works; 5 stat cards (NEW=3, TODAY=1, TOTAL=3, PAID=0, REVIEWS=6); 3 tabs (Bookings, Car Availability, Reviews); 'Welcome, Pankaj!' toast",
+    "admin_car_availability": "PASS — Lists all 12 cars (8 standard + 4 premium incl. 'Toyota Fortuner (Premium)') with ON toggle buttons; matches /api/cars/availability backend"
+  },
+  "action_items": [
+    "Fix /app/frontend/src/App.js line 11 — change document.title to 'Krishn Tour and Travels — Ahmedabad Cabs' (currently overrides index.html with old 'Krishna … Pune' string)",
+    "Update /app/frontend/src/components/RateUs.jsx (lines 25, 52) — replace 'Krishna Tour & Travels' with 'Krishn Tour and Travels'",
+    "Update /app/frontend/src/components/Services.jsx (line 20) — replace 'Krishna Tours' with 'Krishn Tour and Travels'"
+  ],
+  "critical_code_review_comments": [
+    "server.py is ~480 lines — still single-file, manageable. Models, routes, and helpers cleanly separated.",
+    "Razorpay placeholder detection uses string-suffix heuristic (.endswith('placeholder'/'secret')) — works but fragile; consider an explicit RAZORPAY_ENABLED=false env flag.",
+    "/api/payments/upi-notify is unauthenticated — anyone with a booking_id can mark it paid. Acceptable for current MVP since admin must verify, but flag this as risk.",
+    "send_booking_email exception path only logs; consider persisting email delivery status on the booking doc for admin visibility.",
+    "Frontend title is being overwritten in App.js useEffect — index.html meta is fine; this is the only branding leak that still references Pune."
+  ],
+  "updated_files": [
+    "/app/backend/tests/backend_test.py (rewritten for iteration 2 — 29 tests)"
+  ],
+  "success_rate": {"backend": "100% (29/29)", "frontend": "~95% — 3 minor branding leftovers"},
+  "test_credentials": "admin / admin123 (verified). NOTE: /app/memory/test_credentials.md still lists old phone 9913258261 / dixitnerpagar@gmail.com — recommend updating to 7600491012 / krishntourandtravels@gmail.com",
+  "seed_data_creation": "Test bookings/reviews created with TEST_ prefix; one TEST booking deleted in cleanup. ~2 test bookings remain in DB visible in admin dashboard.",
+  "retest_needed": true,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "All critical backend flows + admin Car Availability + UPI payment fallback verified. Razorpay live test cannot be done until real keys are added (fallback path tested). Resend emails are sent successfully — note in test mode Resend may only deliver to verified addresses but the API call succeeds (message ID logged). Run: pytest /app/backend/tests/backend_test.py -v",
+  "rca of the issue": "The 'Krishna' brand leakage exists in 3 frontend files (App.js, RateUs.jsx, Services.jsx) — these were missed during the rebrand to 'Krishn Tour and Travels'. App.js useEffect runs on mount and overwrites the correct index.html <title>, hence browser tab shows the old name plus wrong city ('Pune'). Fix: rename strings in those 3 files to 'Krishn Tour and Travels' and 'Ahmedabad'."
+}

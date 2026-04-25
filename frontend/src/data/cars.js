@@ -1,161 +1,106 @@
-// Car fleet data, organised by category
-export const CAR_CATEGORIES = [
-  {
-    id: "hatchback",
-    title: "Hatchback",
-    subtitle: "City rides · Compact",
-    cars: [
-      {
-        name: "Maruti Swift",
-        image: "https://images.unsplash.com/photo-1583267746897-2cf66319ef97?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
-        seats: 4,
-        bags: 2,
-        per_km: 10,
-        per_day: 1800,
-        features: ["AC", "Fuel Efficient", "Music"],
-        type: "hatchback",
-      },
-      {
-        name: "Hyundai i20",
-        image: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
-        seats: 4,
-        bags: 2,
-        per_km: 11,
-        per_day: 2000,
-        features: ["AC", "Bluetooth", "Touchscreen"],
-        type: "hatchback",
-      },
-    ],
-  },
-  {
-    id: "sedan",
-    title: "Sedan",
-    subtitle: "Comfort · Everyday",
-    cars: [
-      {
-        name: "Maruti Swift Dzire",
-        image: "https://images.unsplash.com/photo-1774389412736-44fc35ae7699?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwzfHx3aGl0ZSUyMHNlZGFuJTIwY2FyJTIwdHJhdmVsfGVufDB8fHx8MTc3NjQyODk2OXww&ixlib=rb-4.1.0&q=85",
-        seats: 4,
-        bags: 2,
-        per_km: 12,
-        per_day: 2200,
-        features: ["AC", "Fuel Efficient", "Music System"],
-        type: "sedan",
-      },
-      {
-        name: "Honda City",
-        image: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
-        seats: 4,
-        bags: 3,
-        per_km: 14,
-        per_day: 2600,
-        features: ["AC", "Premium Interior", "Sunroof"],
-        type: "sedan",
-      },
-    ],
-  },
-  {
-    id: "suv",
-    title: "SUV",
-    subtitle: "Premium · Powerful",
-    cars: [
-      {
-        name: "Toyota Fortuner",
-        image: "https://images.unsplash.com/photo-1758411898637-dc03ee565fb8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjV8MHwxfHNlYXJjaHwxfHx3aGl0ZSUyMHByZW1pdW0lMjBzdXYlMjBjYXIlMjBvbiUyMHJvYWR8ZW58MHx8fHwxNzc2NDI4OTY5fDA&ixlib=rb-4.1.0&q=85",
-        seats: 7,
-        bags: 5,
-        per_km: 25,
-        per_day: 5500,
-        features: ["4x4 Available", "Leather Seats", "Panoramic"],
-        type: "suv",
-      },
-      {
-        name: "Hyundai Creta",
-        image: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
-        seats: 5,
-        bags: 4,
-        per_km: 18,
-        per_day: 3800,
-        features: ["AC", "Cruise Control", "Sunroof"],
-        type: "suv",
-      },
-    ],
-  },
-  {
-    id: "muv",
-    title: "MUV",
-    subtitle: "Family · Spacious",
-    cars: [
-      {
-        name: "Toyota Innova Crysta",
-        image: "https://images.unsplash.com/photo-1762887137951-4b7b793282ee?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjV8MHwxfHNlYXJjaHwyfHx3aGl0ZSUyMHByZW1pdW0lMjBzdXYlMjBjYXIlMjBvbiUyMHJvYWR8ZW58MHx8fHwxNzc2NDI4OTY5fDA&ixlib=rb-4.1.0&q=85",
-        seats: 7,
-        bags: 4,
-        per_km: 18,
-        per_day: 3500,
-        features: ["AC", "Push Start", "Music System"],
-        type: "muv",
-      },
-      {
-        name: "Maruti Ertiga",
-        image: "https://images.unsplash.com/photo-1758411898970-39925f9f6d9f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjV8MHwxfHNlYXJjaHw0fHx3aGl0ZSUyMHByZW1pdW0lMjBzdXYlMjBjYXIlMjBvbiUyMHJvYWR8ZW58MHx8fHwxNzc2NDI4OTY5fDA&ixlib=rb-4.1.0&q=85",
-        seats: 6,
-        bags: 3,
-        per_km: 14,
-        per_day: 2800,
-        features: ["AC", "Spacious Cabin", "Music System"],
-        type: "muv",
-      },
-    ],
-  },
+// Krishn Tour and Travels — fleet & route data
+//
+// Daily rate ranges and per-km rates as provided by the owner.
+// "RENT THIS CAR" pattern matches the radhecab.com layout.
+
+const PIC = {
+  wagonr: "https://images.unsplash.com/photo-1610847499832-918a1c3c6811?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
+  dzire: "https://images.unsplash.com/photo-1774389412736-44fc35ae7699?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
+  aura: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
+  ertiga: "https://images.unsplash.com/photo-1758411898970-39925f9f6d9f?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
+  city: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
+  innova: "https://images.unsplash.com/photo-1757171849030-93b6db95846a?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
+  crysta: "https://images.unsplash.com/photo-1762887137951-4b7b793282ee?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
+  fortuner: "https://images.unsplash.com/photo-1758411898637-dc03ee565fb8?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
+  benz: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
+  bmw: "https://images.unsplash.com/photo-1555215695-3004980ad54e?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
+  audi: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
+};
+
+export const STANDARD_FLEET = [
+  { name: "Wagon R",            type: "hatchback", per_km: 10, day: 2200, seats: 4, bags: 2, image: PIC.wagonr },
+  { name: "Maruti Swift Dzire", type: "sedan",     per_km: 11, day: 2700, seats: 4, bags: 2, image: PIC.dzire },
+  { name: "Hyundai Aura",       type: "sedan",     per_km: 11, day: 2700, seats: 4, bags: 2, image: PIC.aura },
+  { name: "Maruti Ertiga",      type: "muv",       per_km: 14, day: 3300, seats: 6, bags: 3, image: PIC.ertiga },
+  { name: "Honda City",         type: "sedan",     per_km: 14, day: 3300, seats: 4, bags: 3, image: PIC.city },
+  { name: "Innova",             type: "muv",       per_km: 17, day: 5000, seats: 7, bags: 4, image: PIC.innova },
+  { name: "Toyota Innova Crysta", type: "muv",     per_km: 20, day: 5500, seats: 7, bags: 4, image: PIC.crysta },
+  { name: "Toyota Fortuner",    type: "suv",       per_km: 25, day: 7000, seats: 7, bags: 5, image: PIC.fortuner },
 ];
 
-export const ALL_CARS = CAR_CATEGORIES.flatMap((c) => c.cars);
+export const PREMIUM_FLEET = [
+  { name: "Mercedes E-Class", type: "premium", per_km_min: 35, per_km_max: 80, day_min: 8500, day_max: 13000, seats: 4, bags: 3, image: PIC.benz },
+  { name: "BMW 5-Series",     type: "premium", per_km_min: 35, per_km_max: 60, day_min: 8500, day_max: 13000, seats: 4, bags: 3, image: PIC.bmw },
+  { name: "Audi A6",          type: "premium", per_km_min: 35, per_km_max: 80, day_min: 8500, day_max: 13000, seats: 4, bags: 3, image: PIC.audi },
+  { name: "Toyota Fortuner (Premium)", type: "premium", per_km_min: 25, per_km_max: 55, day_min: 4999, day_max: 7500, seats: 7, bags: 5, image: PIC.fortuner },
+];
+
+export const ALL_CARS = [
+  ...STANDARD_FLEET.map(c => c.name),
+  ...PREMIUM_FLEET.map(c => c.name),
+];
 
 export const TRIP_TYPES = [
-  { value: "Car with Driver", label: "Car with Driver", needsDrop: true, isSelfDrive: false },
-  { value: "Self Drive Car", label: "Self Drive Car", needsDrop: false, isSelfDrive: true },
-  { value: "Corporate Pickup", label: "Corporate Pickup", needsDrop: true, isSelfDrive: false },
-  { value: "Airport Transfer", label: "Airport Transfer", needsDrop: true, isSelfDrive: false },
-  { value: "Wedding/Marriage", label: "Wedding / Marriage", needsDrop: false, isSelfDrive: true },
+  { value: "Car with Driver",  needsDrop: true,  isSelfDrive: false, isRoute: false },
+  { value: "Self Drive Car",   needsDrop: false, isSelfDrive: true,  isRoute: false },
+  { value: "Round Trip",       needsDrop: true,  isSelfDrive: false, isRoute: true },
+  { value: "One-Way Trip",     needsDrop: true,  isSelfDrive: false, isRoute: true },
+  { value: "Corporate Pickup", needsDrop: true,  isSelfDrive: false, isRoute: false },
+  { value: "Airport Transfer", needsDrop: true,  isSelfDrive: false, isRoute: false },
+  { value: "Wedding/Marriage", needsDrop: false, isSelfDrive: true,  isRoute: false },
+  { value: "Emergency",        needsDrop: false, isSelfDrive: false, isRoute: false },
+];
+
+// Round/One-way preset routes (Sedan & SUV starting prices)
+export const ROUTES = [
+  { from: "Ahmedabad", to: "Vadodara",   sedan: 1799, suv: 2699 },
+  { from: "Ahmedabad", to: "Rajkot",     sedan: 2899, suv: 3899 },
+  { from: "Ahmedabad", to: "Surat",      sedan: 3599, suv: 4199 },
+  { from: "Ahmedabad", to: "Bhuj",       sedan: 3899, suv: 4899 },
+  { from: "Ahmedabad", to: "Jodhpur",    sedan: 6499, suv: 7999 },
+  { from: "Ahmedabad", to: "Udaipur",    sedan: 3999, suv: 4999 },
+  { from: "Ahmedabad", to: "Indore",     sedan: 7499, suv: 8999 },
+  { from: "Ahmedabad", to: "Jamnagar",   sedan: 4500, suv: 5500 },
+  { from: "Ahmedabad", to: "Bhavnagar",  sedan: 2700, suv: 3500 },
+  { from: "Ahmedabad", to: "Gandhidham", sedan: 3699, suv: 4499 },
 ];
 
 export const SERVICES = [
   {
     title: "Car with Driver",
-    desc: "Plan your getaway with a comfortable cab and a trusted driver. Pune to Mumbai, Lonavala, anywhere in India.",
-    image:
-      "https://images.unsplash.com/photo-1738482223844-7ff598553cf7?crop=entropy&cs=srgb&fm=jpg&q=85&w=1200",
+    desc: "Trusted, uniformed drivers for outstation trips. Pune to Mumbai, Lonavala, anywhere across India.",
+    image: "https://images.unsplash.com/photo-1738482223844-7ff598553cf7?crop=entropy&cs=srgb&fm=jpg&q=85&w=1200",
   },
   {
     title: "Self Drive Cars",
-    desc: "Premium self-drive cars delivered to your doorstep or pick-up from our station. Drive your way.",
-    image:
-      "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?crop=entropy&cs=srgb&fm=jpg&q=85&w=1200",
+    desc: "Premium self-drive cars delivered to your doorstep (₹10/km delivery) or pickup from our location. Aadhar + DL required.",
+    image: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?crop=entropy&cs=srgb&fm=jpg&q=85&w=1200",
+  },
+  {
+    title: "Round / One-Way Trips",
+    desc: "Pre-planned routes Ahmedabad ⇌ Vadodara, Surat, Rajkot, Bhuj, Udaipur and 5 more — with driver, toll & parking extra.",
+    image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?crop=entropy&cs=srgb&fm=jpg&q=85&w=1200",
   },
   {
     title: "Airport Transfers",
     desc: "Pre-booked cabs for hassle-free airport pickups & drops with on-time service, 24x7 availability.",
-    image:
-      "https://images.unsplash.com/photo-1764090317825-9b76e437c8d8?crop=entropy&cs=srgb&fm=jpg&q=85&w=1200",
+    image: "https://images.unsplash.com/photo-1764090317825-9b76e437c8d8?crop=entropy&cs=srgb&fm=jpg&q=85&w=1200",
   },
   {
-    title: "Wedding Cars",
-    desc: "Decorated luxury cars for your special day. Make the baraat grand and unforgettable.",
-    image:
-      "https://images.unsplash.com/photo-1760110885805-273b5bf5e50b?crop=entropy&cs=srgb&fm=jpg&q=85&w=1200",
+    title: "Wedding Cars (No Decoration)",
+    desc: "Premium cars for the baraat & guests. Decoration not provided. Scratch / damage charges applicable as per assessment.",
+    image: "https://images.unsplash.com/photo-1760110885805-273b5bf5e50b?crop=entropy&cs=srgb&fm=jpg&q=85&w=1200",
   },
   {
     title: "Corporate Travel",
-    desc: "Chauffeur-driven premium sedans and SUVs for executives, clients and business meetings.",
-    image:
-      "https://images.unsplash.com/photo-1576566465339-2b99f6b33277?crop=entropy&cs=srgb&fm=jpg&q=85&w=1200",
+    desc: "Chauffeur-driven sedans and SUVs for executives, clients and business meetings.",
+    image: "https://images.unsplash.com/photo-1576566465339-2b99f6b33277?crop=entropy&cs=srgb&fm=jpg&q=85&w=1200",
   },
 ];
 
 export const DRIVERS = [
-  { name: "Rajesh Kumar", years: 12, languages: "Hindi · English · Marathi" },
-  { name: "Anil Sharma", years: 8, languages: "Hindi · English" },
-  { name: "Sunil Patil", years: 10, languages: "Marathi · Hindi · English" },
+  { name: "Rajesh Kumar", years: 12, languages: "Hindi · English · Gujarati" },
+  { name: "Anil Sharma",  years: 8,  languages: "Hindi · English" },
+  { name: "Sunil Patel",  years: 10, languages: "Gujarati · Hindi · English" },
   { name: "Mahesh Yadav", years: 15, languages: "Hindi · English · Punjabi" },
 ];
