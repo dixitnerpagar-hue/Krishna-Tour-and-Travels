@@ -8,7 +8,7 @@ import Admin from "@/pages/Admin";
 
 function App() {
   useEffect(() => {
-    document.title = "Krishna Tour & Travels — Premium Cabs in Pune";
+    document.title = "Krishn Tour and Travels — Ahmedabad Cabs";
   }, []);
 
   return (

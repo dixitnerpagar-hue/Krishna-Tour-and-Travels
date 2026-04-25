@@ -1,34 +1,41 @@
-# PRD — Krishna Tour & Travels
+# PRD — Krishn Tour and Travels
+
+Owner: **Pankaj Gemita** · Ahmedabad, Gujarat
+Contact: +91 7600491012 · krishntourandtravels@gmail.com
 
 ## Original Problem
-Recreate the website at `https://swift-sedan-book.preview.emergentagent.com/` (Krishna Tour & Travels — Pune cab booking) with a long list of customisations and ship the source as a zip the user can drop into a GitHub repo.
+Build a full-stack premium cab booking website for the Indian market (Ahmedabad-based) with multiple trip types, payment integration, email notifications, and an admin dashboard.
 
-## Implemented (Apr 2026)
-- Hero with subheading "Your Comfort, Our Wheels"
-- Trip types: Car with Driver / Self Drive Car / Corporate Pickup / Airport Transfer / Wedding/Marriage
-- Conditional fields: Pickup+Drop for driver trips, Self-drive options (drop at location / pick from our location with Google Map embed of Vishwakarma Metro Station, Pune) for self-drive trips
-- Pickup Time + Drop Time fields
-- Fleet categories: Hatchback / Sedan / SUV / MUV
-- Services with Car with Driver & Self Drive Cars
-- Driver Reviews + Car Reviews + Write Review form (1-5 stars)
-- Rate Us section
-- Get in Touch with phone 9913258261, email dixitnerpagar@gmail.com, office at Vishwakarma Metro
-- Multi-step Booking Confirmation page: Payment → Documents (Aadhar + DL via WhatsApp) → Done
-- All WhatsApp links → +91 9913258261 with pre-message "Also Submit your Aadhar card and Driving Licence"
-- Admin Dashboard at /admin (admin/admin123) — JWT auth, stats, bookings table with confirm+delete, reviews
-- 21/21 backend tests passing
+## Implemented (Apr 2026 — Iteration 2)
+- Brand: "Krishn Tour and Travels" with custom logo
+- 8 trip types incl. Round Trip, One-Way Trip, Self-Drive, Wedding/Marriage, Emergency
+- 8 standard cars (Wagon R → Fortuner) + 4 premium cars (Mercedes/BMW/Audi/Fortuner premium)
+- 10 popular round/one-way routes (Ahmedabad ⇌ Vadodara, Surat, Rajkot, Bhuj, Jodhpur, Udaipur, Indore, Jamnagar, Bhavnagar, Gandhidham)
+- Pickup + Drop date + Pickup + Drop time fields
+- Self-drive: drop-at-location (₹10/km) or pick from Ahmedabad office, Aadhar/DL upload via WhatsApp
+- Wedding cars no-decoration + scratch/damage clause
+- Auto price-negotiation flag for >7-day bookings
+- 50% advance + 50% post-ride payment flow
+- **Razorpay** payment gateway (with UPI fallback to `7600491012@upi`)
+- **Resend** email notifications to `krishntourandtravels@gmail.com` on every booking
+- Driver + Car reviews + Rate Us section (1-5 stars)
+- Emergency Booking — direct call to owner
+- Admin Dashboard with **Car Availability** toggle (mark cars as currently booked)
+- 29/29 backend tests passing; frontend e2e verified
 
 ## Backlog (P1)
-- Email notifications to gametipm1010@gmail.com (needs Resend/SMTP key)
-- Real payment gateway (Razorpay/Stripe) on Payment step
-- File-upload for Aadhar/DL on confirmation page (currently WhatsApp only)
-- SMS booking notifications
+- Real Razorpay keys (currently placeholder → UPI fallback)
+- File upload for Aadhar/DL (currently WhatsApp only)
+- SMS notifications via Twilio
+- Razorpay webhook for auto-confirmation
 
 ## Backlog (P2)
-- Admin: edit bookings, export to CSV, search/filter
+- Multi-language (Gujarati, Hindi)
 - Driver login with availability calendar
-- Multi-language (Marathi)
+- Admin: edit bookings, export to CSV
+- Customer login + booking history
+- Loyalty / referral program
 
 ## Auth
-- Admin: `admin / admin123` — change via env `ADMIN_USERNAME` / `ADMIN_PASSWORD`
+- Admin: `admin` / `admin123` — change via env `ADMIN_USERNAME` / `ADMIN_PASSWORD`
 - JWT secret: env `JWT_SECRET`

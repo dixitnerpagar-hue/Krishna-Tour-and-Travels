@@ -17,7 +17,7 @@ export default function Services() {
             hum saath hain.
           </h2>
           <p className="mt-5 text-white/70 max-w-2xl mx-auto">
-            Wedding se corporate tak, airport se outstation tak — Krishna Tours
+            Wedding se corporate tak, airport se outstation tak — Krishn Tour and Travels
             delivers reliable, premium mobility for every occasion.
           </p>
         </div>

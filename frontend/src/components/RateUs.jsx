@@ -22,7 +22,7 @@ export default function RateUs() {
     try {
       await api.post("/reviews", {
         review_type: "site",
-        target_name: "Krishna Tour & Travels",
+        target_name: "Krishn Tour and Travels",
         reviewer_name: name,
         rating,
         comment,
@@ -49,7 +49,7 @@ export default function RateUs() {
         </h2>
         <p className="mt-4 text-white/85 max-w-lg mx-auto">
           Loved your ride? Share your experience and help other travellers
-          discover Krishna Tour &amp; Travels.
+          discover Krishn Tour and Travels.
         </p>
 
         {done ? (
