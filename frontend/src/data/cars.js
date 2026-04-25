@@ -4,17 +4,17 @@
 // "RENT THIS CAR" pattern matches the radhecab.com layout.
 
 const PIC = {
-  wagonr: "https://images.unsplash.com/photo-1610847499832-918a1c3c6811?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
-  dzire: "https://images.unsplash.com/photo-1774389412736-44fc35ae7699?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
-  aura: "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
-  ertiga: "https://images.unsplash.com/photo-1758411898970-39925f9f6d9f?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
-  city: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
-  innova: "https://images.unsplash.com/photo-1757171849030-93b6db95846a?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
-  crysta: "https://images.unsplash.com/photo-1762887137951-4b7b793282ee?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
-  fortuner: "https://images.unsplash.com/photo-1758411898637-dc03ee565fb8?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
-  benz: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
-  bmw: "https://images.unsplash.com/photo-1555215695-3004980ad54e?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
-  audi: "https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?crop=entropy&cs=srgb&fm=jpg&q=85&w=900",
+  wagonr: "/cars/wagonr.png",
+  dzire: "/cars/dzire.png",
+  aura: "/cars/aura.png",
+  ertiga: "/cars/ertiga.png",
+  city: "/cars/aura.png",
+  innova: "/cars/innova.jpeg",
+  crysta: "/cars/crysta.png",
+  fortuner: "/cars/fortuner.jpeg",
+  benz: "/cars/mercedes.png",
+  bmw: "/cars/bmw.png",
+  audi: "/cars/audi.png",
 };
 
 export const STANDARD_FLEET = [
