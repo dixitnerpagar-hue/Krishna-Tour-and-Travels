@@ -8,7 +8,7 @@ const PIC = {
   dzire: "/cars/dzire.png",
   aura: "/cars/aura.png",
   ertiga: "/cars/ertiga.png",
-  city: "/cars/aura.png",
+  city: "/cars/city.png",
   innova: "/cars/innova.jpeg",
   crysta: "/cars/crysta.png",
   fortuner: "/cars/fortuner.jpeg",
